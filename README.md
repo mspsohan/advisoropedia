@@ -1,6 +1,6 @@
 # Advisoropedia Full Stack Assignment
 
-Live Link:
+Live Link: [https://advisoropedia.netlify.app](https://advisoropedia.netlify.app)
 
 This repository contains a full-stack application built with Node.js, Express.js, MongoDB, React.js, and Tailwind CSS. The application implements user signup functionality with JWT authentication and a post list screen with infinite scroll.
 

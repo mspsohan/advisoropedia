@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 dotenv.config();
 app.use(cors({
-   origin: ["https://advisoropedia-post.vercel.app", "http://localhost:5173"]
+   origin: ["https://advisoropedia.netlify.app", "http://localhost:5173"]
 }));
 
 app.get("/", (req, res) => {
