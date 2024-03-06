@@ -33,7 +33,8 @@ const Signup = () => {
             },
          };
          //  save user Data in database
-         const { data } = await axiosPublic.post("http://localhost:5000/api/user", { name, email, image, password }, config);
+         const { data } = await axiosPublic.post("/api/user", { name, email, image, password }, config);
+         console.log(data)
          localStorage.setItem("userInfo", JSON.stringify(data));
          setLoading(false);
          navigate('/');
@@ -62,12 +63,12 @@ const Signup = () => {
                   <div className="space-y-4">
                      {/* Name Field */}
                      <div>
-                        <input type="text" placeholder="Full Name *" defaultValue="Sohan2" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("name", { required: true })} />
+                        <input type="text" placeholder="Full Name *" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("name", { required: true })} />
                         <p className="text-xs text-red-500">{errors.name && <span>This field is required</span>}</p>
                      </div>
                      {/* Email Field */}
                      <div>
-                        <input type="text" placeholder="Email *" defaultValue="Sohan3@gmail.com" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("email", { required: true, pattern: /^\S+@\S+$/i })} />
+                        <input type="text" placeholder="Email *" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("email", { required: true, pattern: /^\S+@\S+$/i })} />
                         <p className="text-xs text-red-500"> {errors.email && <span>This field is required and must be a valid email address</span>}</p>
                      </div>
                      {/* Image Field */}
@@ -77,7 +78,7 @@ const Signup = () => {
                      {/* Password Field */}
                      <div>
                         <div className="relative">
-                           <input type={showPassword ? "text" : "password"} placeholder="Password *" defaultValue="1111A!a1" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("password", { required: true, maxLength: 12, minLength: 8, pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ })} />
+                           <input type={showPassword ? "text" : "password"} placeholder="Password *" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("password", { required: true, maxLength: 12, minLength: 8, pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ })} />
                            <button type="button" onClick={togglePassword}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 focus:outline-none">
                               {showPassword ? (
@@ -92,7 +93,7 @@ const Signup = () => {
                      {/* Confirm Password Field */}
                      <div>
                         <div className="relative">
-                           <input type={showPassword ? "text" : "password"} placeholder="Confirm Password *" defaultValue="1111A!a1" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("confirmPassword", { required: true, validate: (value) => value === watch('password') })} />
+                           <input type={showPassword ? "text" : "password"} placeholder="Confirm Password *" className="bg-gray-100 w-full text-sm px-4 py-4 focus:bg-transparent outline-orange-300 transition-all" {...register("confirmPassword", { required: true, validate: (value) => value === watch('password') })} />
                            <button type="button" onClick={togglePassword}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 focus:outline-none">
                               {showPassword ? (

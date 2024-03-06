@@ -13,6 +13,6 @@ export const saveUser = async (user, name, image) => {
       email: user?.email,
       image: user?.photoURL || image,
    };
-   const { data } = await axiosPublic.post(`/users/${user?.email}`, currentUser);
+   const { data } = await axiosPublic.post(`api/user/${user?.email}`, currentUser);
    return data;
 };

@@ -5,11 +5,12 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
-import axios from "axios";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
    const [showPassword, setShowPassword] = useState(false);
    const [loading, setLoading] = useState(false)
    const navigate = useNavigate()
+   const axiosPublic = useAxiosPublic()
 
    const togglePassword = () => setShowPassword(!showPassword);
 
@@ -22,7 +23,7 @@ const Login = () => {
                "content-type": "application/json"
             }
          }
-         const { data } = await axios.post("http://localhost:5000/api/user/login", { email, password }, config)
+         const { data } = await axiosPublic.post("/api/user/login", { email, password }, config)
          localStorage.setItem("userInfo", JSON.stringify(data))
          setLoading(false)
          toast.success("Login Successful")

@@ -29,6 +29,7 @@ const Post = () => {
       return [...acc, ...page];
    }, []);
 
+
    if (isPending) <div>Loading...</div>
 
    return (

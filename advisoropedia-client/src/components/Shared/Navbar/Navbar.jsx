@@ -5,28 +5,22 @@ import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
    const [open, setOpen] = useState(false);
-   const { user, setUser } = useAuth()
+   const { user, setUser, socialUser, logOut } = useAuth()
    const navigate = useNavigate()
 
    const handleLogout = () => {
       localStorage.removeItem('userInfo');
       setUser(null);
+      logOut()
+      navigate('/login')
    };
 
    useEffect(() => {
-      const storedUserInfo = localStorage.getItem('userInfo');
-      if (storedUserInfo) {
-         const parsedUserInfo = JSON.parse(storedUserInfo);
-         setUser(parsedUserInfo);
-      }
-   }, [setUser]);
-
-   useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"))
-      if (!user) {
+      if (user || socialUser) {
          navigate("/")
       }
-   }, [user, navigate])
+   }, [user, navigate, socialUser])
 
    return (
       <header className={`bg-orange-100 dark:bg-dark`}>
@@ -52,7 +46,7 @@ const Navbar = () => {
                      </nav>
                   </div>
                   {
-                     user ? <button onClick={handleLogout} className="pr-16 dark:hover:text-orange-400 py-3 text-base font-medium text-dark hover:text-primary dark:text-black">Log out</button> : <div className="hidden justify-end  pr-16 sm:flex lg:pr-0">
+                     user || socialUser ? <button onClick={handleLogout} className="pr-16 dark:hover:text-orange-400 py-3 text-base font-medium text-dark hover:text-primary dark:text-black">Log out</button> : <div className="hidden justify-end  pr-16 sm:flex lg:pr-0">
                         <Link to="/login" className="px-7 dark:hover:text-orange-400 py-3 text-base font-medium text-dark hover:text-primary dark:text-black">
                            Sign in
                         </Link>
